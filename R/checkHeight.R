@@ -2,6 +2,7 @@ library(dplyr)
 # Implements the method checkHeight, to calculate the
 #height difference of students from the general or a sex specific mean
 
+
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("Welcome to my first R-package and thanks for using it, muchacho!")
 }
