@@ -11,3 +11,4 @@ LazyData: true
 Imports: dplyr, checkmate
 RoxygenNote: 6.0.1
 Suggest: testthat
+Suggests: testthat

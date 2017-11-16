@@ -4,7 +4,7 @@
 \alias{mean}
 \title{Mean value of a vector}
 \usage{
-mean(x)
+mean(height.input = height)
 }
 \arguments{
 \item{x}{a numeric vector}
@@ -23,6 +23,4 @@ mean(x)
 }
 \author{
 Darya Busen <\email{dasha-89.89@mail.ru}>
-
-Return the rounded mean
 }
