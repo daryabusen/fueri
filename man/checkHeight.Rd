@@ -2,19 +2,21 @@
 % Please edit documentation in R/checkHeight.R
 \name{checkHeight}
 \alias{checkHeight}
-\title{Create a dataframe with names and difference in height from sex specific mean}
+\title{Compare the height of persons in a dataset with the mean of the height of the other persons}
 \usage{
-checkHeight(students.input = students)
+checkHeight(students.input = students, sex.spezific = TRUE,
+  print.statement = FALSE)
 }
 \arguments{
-\item{students.input}{[\code{data.frame}]\cr
-The original students dataframe
-Default is students}
+\item{students.input}{The original students data.frame}
+
+\item{print.statement}{Print a message after the calculation}
+
+\item{sex.specific}{Sex specific mean or mean of population}
 }
 \value{
-[\code{data.frame}]\cr
-  Return the newly created data.frame
+Return the newly created data.frame, difference in height to gender specific mean
 }
 \description{
-Create a dataframe with names and difference in height from sex specific mean
+Compare the height of persons in a dataset with the mean of the height of the other persons
 }

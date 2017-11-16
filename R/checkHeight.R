@@ -54,5 +54,5 @@ checkHeight = function(students.input = students, sex.spezific = TRUE, print.sta
 
   # Return new created dataframe
   return(output.df)
+  }
 }
-
