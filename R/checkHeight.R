@@ -1,57 +1,58 @@
-#' @import dplyr
-# Implements the method checkHeight, to calculate the
-#height difference of students from the general or a sex specific mean
-
 
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("Welcome to my first R-package and thanks for using it, muchacho!")
 }
+#' Compare the height of persons in a dataset with the mean of the height of the other persons
+#' @param students.input The original students data.frame
+#' @param sex.specific Sex specific mean or mean of population
+#' @param print.statement Print a message after the calculation
+#' @return Return the newly created data.frame, difference in height to gender specific mean
+#' @import checkmate
+#'
+#' @export
+checkHeight = function(students.input = students, sex.spezific = TRUE, print.statement = FALSE){
 
-# Dataframe attributes
-age = c(19, 22, 21, 23, 22, 20, 28, 25)
-weight = c(50, 75, 80, 56, 75, 58, 65, 82)
-height = c(1.66, 1.78, 1.90, 1.72, 1.83, 1.68, 1.70, 1.85)
-sex = c("F", "M", "M", "F", "M", "F", "F", "M")
+  #Do check:
+  #sex.specific is a logical value
+  assertLogical(sex.specific)
+  #print.statement is a logical value
+  assertLogical(print.statement)
+  #the Data Frame with a minimum of 4 rows and exactly 5 columns without any missing values
+  assertDataFrame(students.input, min.rows = 4, ncols = 5, any.missing = FALSE)
+  #third column is numeric and has values between 1.30 and 2.40
+  assertNumeric(students.input[,3], lower = 1.29, upper = 2.41)
+  #4th column is of type factor and with maximum two levels "M" and "F"
+  assertFactor(students.input[,4], levels = c("M","F"))
 
-# Create dataframe
-students = data.frame(cbind(age, weight, height, sex))
+  if(sex.specific == TRUE){
+    #Calculate the sex specific mean in height
+  male.mean = as.numeric(students.input %>%
+                           group_by(sex) %>%
+                           summarise(compareheight:::mean(height)) %>%
+                           filter(sex == "M") %>%
+                           select("compareheight:::mean(height)"))
 
-# Change dataframe datatypes
-students = transform(students, age = as.numeric(as.character(age)))
-students = transform(students, height = as.numeric(as.character(height)))
-students = transform(students, weight = as.numeric(as.character(weight)))
-
-# Add names
-students$name = c("Maria", "Franz", "Peter", "Lisa", "Hans", "Eva", "Mia", "Karl")
-
-#' Create a dataframe with names and difference in height from sex specific mean
-#' @param students.input [\code{data.frame}]\cr
-#'   The original students dataframe
-#'   Default is students
-#' @return [\code{data.frame}]\cr
-#'   Return the newly created data.frame
-checkHeight = function(students.input = students){
-  # Calculate the sex specific mean in height
-  male.mean = students.input %>%
-    filter(sex == "M") %>%
-    summarise(mean = mean(height))
-  female.mean = students.input %>%
-    filter(sex == "F") %>%
-    summarise(mean = mean(height))
+  female.mean = as.numeric(students.input %>%
+                             group_by(sex) %>%
+                             summarise(compareheight:::mean(height)) %>%
+                             filter(sex == "F") %>%
+                             select("compareheight:::mean(height)"))
 
   # Create new list saving all the sex specific height differences
   height.list = apply(students.input, MARGIN = 1,
                       FUN = function(student){
-                        (if (student["sex"] == "M") male.mean - as.numeric(student["height"])
-                         else female.mean - as.numeric(student["height"]))
+                        (if (student["sex"] == "M") male.mean - as.numeric(student["height"])*100
+                         else female.mean - as.numeric(student["height"]))*100
                       })
 
   # Create a new dataframe containing only the names and the height differences
   output.df = data.frame("name" = students.input$name, "sexspec_height_diff" = unlist(height.list))
 
+  # Print success message
+
+  if (print.statement) print("Yippie, I calculated the mean difference!")
+
   # Return new created dataframe
   return(output.df)
 }
 
-# Call method
-checkHeight(students.input = students)
