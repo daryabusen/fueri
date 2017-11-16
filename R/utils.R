@@ -10,10 +10,12 @@
 #'
 #' @author Darya Busen <\email{dasha-89.89@@mail.ru}>
 #'
-#' Return the rounded mean
-mean = function(x) {
-  n = length(x)
-  sum = sum(x)
-  rnd = round(x = (1/n) * sum , digits = 3)
-  return(rnd)
+#'
+mean = function(height.input = height) {
+# Do checks
+checkmate::assertVector(height.input)
+checkmate::assert(checkmate::checkInteger(height.input, lower=0, min.len=1, any.missing = FALSE, null.ok=FALSE),
+                  checkmate::checkNumeric(height.input, lower=0, min.len=1, any.missing = FALSE, null.ok=FALSE))
+# Return rounded mean
+return(round(base::mean(height.input),digits = 3))
 }
