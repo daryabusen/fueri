@@ -14,15 +14,15 @@ checkHeight = function(students.input = students, sex.spezific = TRUE, print.sta
 
   #Do check:
   #sex.specific is a logical value
-  assertLogical(sex.specific)
+  checkmate::assertLogical(sex.specific)
   #print.statement is a logical value
-  assertLogical(print.statement)
+  checkmate::assertLogical(print.statement)
   #the Data Frame with a minimum of 4 rows and exactly 5 columns without any missing values
-  assertDataFrame(students.input, min.rows = 4, ncols = 5, any.missing = FALSE)
+  checkmate::assertDataFrame(students.input, min.rows = 4, ncols = 5, any.missing = FALSE)
   #third column is numeric and has values between 1.30 and 2.40
-  assertNumeric(students.input[,3], lower = 1.29, upper = 2.41)
+  checkmate::assertNumeric(students.input[,3], lower = 1.29, upper = 2.41)
   #4th column is of type factor and with maximum two levels "M" and "F"
-  assertFactor(students.input[,4], levels = c("M","F"))
+  checkmate::assertFactor(students.input[,4], levels = c("M","F"))
 
   if(sex.specific == TRUE){
     #Calculate the sex specific mean in height
