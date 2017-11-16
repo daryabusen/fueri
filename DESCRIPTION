@@ -3,11 +3,11 @@ Type: Package
 Title: The difference of height
 Version: 0.1.0
 Author@R: person("Darya", "Busen", email = "dasha-89.89@mail.ru", role = c("aut", "cre"))
-Maintainer: Darya Busen <dasha-89.89@mail.ru>
 Description: This is my pachage for function that checks the difference in height 
              from the sex-specific mean for each of the students.
 License: GLP
 Encoding: UTF-8
 LazyData: true
-Imports: dplyr
+Imports: dplyr, checkmate
 RoxygenNote: 6.0.1
+Suggest: testthat
