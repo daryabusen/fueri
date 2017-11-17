@@ -7,7 +7,7 @@ test_that("Input and output has the same size", {
 # Check if sex.specific works
 test_that("Input parameter sex.specific works correctly", {
   new_students = students
-  new_students$height = c(1.3,1.9,1.75,1.15,1.7,1.8,2.0,1.5)
+  new_students$height = c(1.6,1.6,1.6,1.6,1.6,1.6,1.6,1.6)
   expect_equal(checkHeight(new_students, FALSE),checkHeight(new_students, TRUE))
 })
 
