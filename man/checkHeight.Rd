@@ -4,15 +4,14 @@
 \alias{checkHeight}
 \title{Compare the height of persons in a dataset with the mean of the height of the other persons}
 \usage{
-checkHeight(students.input = students, sex.spezific = TRUE,
-  print.statement = FALSE)
+checkHeight(students.input, sex.specific = TRUE, print.statement = FALSE)
 }
 \arguments{
 \item{students.input}{The original students data.frame}
 
-\item{print.statement}{Print a message after the calculation}
-
 \item{sex.specific}{Sex specific mean or mean of population}
+
+\item{print.statement}{Print a message after the calculation}
 }
 \value{
 Return the newly created data.frame, difference in height to gender specific mean

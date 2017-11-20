@@ -3,3 +3,4 @@
 export(checkHeight)
 import(checkmate)
 import(dplyr)
+importFrom(magrittr,"%>%")
